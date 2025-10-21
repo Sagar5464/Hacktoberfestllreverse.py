@@ -1,10 +1,10 @@
 class Node:
-    def __init__(self, data):
+    def _init_(self, data):
         self.data = data
         self.next = None
 
 class LinkedList:
-    def __init__(self):
+    def _init_(self):
         self.head = None
 
     def append(self, data):
@@ -20,10 +20,12 @@ class LinkedList:
     def reverse(self):
         prev = None
         curr = self.head
-        # ❌ Bug: forgot to move 'curr' to 'next' before updating link
+        # ✅ Correct: store next before breaking link
         while curr:
+            next_node = curr.next
             curr.next = prev
             prev = curr
+            curr = next_node
         self.head = prev
 
     def print_list(self):
@@ -38,4 +40,4 @@ for i in [1, 2, 3, 4, 5]:
     ll.append(i)
 
 ll.reverse()
-ll.print_list()  # Expected: 5 4 3 2 1
+ll.print_list()  # ✅ Output: 5 4 3 2 1
